@@ -6,7 +6,7 @@
 /*   By: sangshin <zxcv1867@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 22:36:49 by sangshin          #+#    #+#             */
-/*   Updated: 2023/10/22 01:28:20 by sangshin         ###   ########.fr       */
+/*   Updated: 2023/10/22 05:42:35 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(void)
 {
 	int fd;
 
-	fd = open("./test.txt", O_RDONLY);
+	fd = open("./xaa", O_RDONLY);
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
@@ -44,18 +44,20 @@ char	*reader(char *string, int fd)
 {
 	char	buf[BUFFER_SIZE + 1];
 	long	read_size;
+	int		i;
 
-	read_size = 0;
-	while (read_size <= BUFFER_SIZE)
-		buf[read_size++] = 0;
+	read_size = 1;
 	while (read_size > 0)
 	{
+		i = 0;
+		while (i <= BUFFER_SIZE)
+			buf[i++] = 0;
 		read_size = read(fd, buf, BUFFER_SIZE);
 		if (read_size <= 0)
 			break ;
 		string = join(string, buf);
 	}
-	if (read_size < 0 && string)
+	if (read_size < 0)
 	{
 		free(string);
 		string = 0;
@@ -73,13 +75,13 @@ char	*join(char *string, char *buf)
 	{
 		string = (char *)malloc(1);
 		string[0] = 0;
-	} // free 해주려면 동적할당해야됨 ㅋㅋ
+	}
 	while (string[i])
 		i++;
 	tmp = (char *)malloc(i + BUFFER_SIZE + 1);
 	i = -1;
 	while (string[++i])
-		tmp[i] =string[i];
+		tmp[i] = string[i];
 	while (*buf)
 		tmp[i++] = *buf++;
 	tmp[i] = 0;
@@ -97,7 +99,7 @@ char	*cutter_cal(char **string)
 	j = -1;
 	while ((*string)[i] != 10 && (*string)[i])
 		i++;
-	tmp = (char *)malloc(i + 2); // 개행 하나 널 하나 총 2개
+	tmp = (char *)malloc(i + 2);
 	while (++j <= i)
 		tmp[j] = (*string)[j];
 	tmp[j] = 0;
@@ -107,7 +109,7 @@ char	*cutter_cal(char **string)
 		if (j == 1)
 		{
 			free(tmp);
-			return (0);
+			tmp = 0;
 		}
 		*string = 0;
 	}
@@ -126,7 +128,7 @@ char	*rose_knife(char *string, int i)
 	j = -1;
 	while (string[i + len])
 		len++;
-	tmp = malloc(len + 1);
+	tmp = (char *)malloc(len + 1);
 	while (++j <= len)
 		tmp[j] = string[i + j];
 	free(string);
