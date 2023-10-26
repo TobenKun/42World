@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sangshin <zxcv1867@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/21 22:36:57 by sangshin          #+#    #+#             */
-/*   Updated: 2023/10/24 18:04:45 by sangshin         ###   ########.fr       */
+/*   Created: 2023/10/24 19:11:07 by sangshin          #+#    #+#             */
+/*   Updated: 2023/10/26 15:38:13 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 100
+# endif
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX 256
 # endif
 
 # include <stdlib.h>
@@ -23,9 +27,9 @@
 # include <fcntl.h>
 
 char	*get_next_line(int fd);
-char	*reader(char *string, int fd);
+char	*reader(char **string, int fd);
+char	*join(char *string, char *buf);
 char	*cutter_cal(char **string);
-char	*join(char *stirng, char *buf);
 char	*rose_knife(char *string, int i);
 
 #endif

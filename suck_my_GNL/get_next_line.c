@@ -5,64 +5,72 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sangshin <zxcv1867@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/21 22:36:49 by sangshin          #+#    #+#             */
-/*   Updated: 2023/10/24 18:04:43 by sangshin         ###   ########.fr       */
+/*   Created: 2023/10/24 19:11:50 by sangshin          #+#    #+#             */
+/*   Updated: 2023/10/26 17:21:10 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
 /*
 int	main(void)
 {
 	int fd;
 
-	fd = open("./xaa", O_RDONLY);
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
+	fd = open("./test.txt", O_RDONLY);
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
 }
 */
 char	*get_next_line(int fd)
 {
-	static char	*strings[257];
+	static char	*strings[OPEN_MAX + 1];
+	char		*tmp;
 
-	if (fd < 0 || fd > 256)
+	if (fd < 0 || fd > OPEN_MAX)
 		return (0);
+	/*
 	if (strings[fd] == 0)
-		strings[fd] = reader(strings[fd], fd);
-	if (strings[fd] == 0)
+	{
+		strings[fd] = (char *)malloc(1);
+		if (strings[fd] == 0)
+			return (0);
+		strings[fd][0] = 0;
+	}
+	*/
+	if (reader(&strings[fd], fd) == 0)
+	{
+		free(strings[fd]);
+		strings[fd] = 0;
 		return (0);
-	return (cutter_cal(&strings[fd]));
+	}
+	tmp = cutter_cal(&strings[fd]);
+	return (tmp);
 }
 
-char	*reader(char *string, int fd)
+char	*reader(char **string, int fd)
 {
 	char	buf[BUFFER_SIZE + 1];
-	ssize_t	read_size;
+	long	read_size;
 	int		i;
 
-	read_size = 1;
-	while (read_size > 0)
+	while (1)
 	{
 		i = 0;
 		while (i <= BUFFER_SIZE)
 			buf[i++] = 0;
 		read_size = read(fd, buf, BUFFER_SIZE);
-		if (read_size == -1)
-		{
-			free(string);
-			return (0);
-		}
 		if (read_size <= 0)
 			break ;
-		string = join(string, buf);
+		i = 0;
+		while (buf[i] != 10 && buf[i])
+			i++;
+		*string = join(*string, buf);
+		if (i < BUFFER_SIZE || *string == 0)
+			break ;
 	}
-	return (string);
+	if (read_size < 0)
+		return (0);
+	return (*string);
 }
 
 char	*join(char *string, char *buf)
@@ -74,18 +82,57 @@ char	*join(char *string, char *buf)
 	if (string == 0)
 	{
 		string = (char *)malloc(1);
+		if (string == 0)
+			return (0);
 		string[0] = 0;
 	}
 	while (string[i])
 		i++;
 	tmp = (char *)malloc(i + BUFFER_SIZE + 1);
 	i = -1;
-	while (string[++i])
-		tmp[i] = string[i];
-	while (*buf)
-		tmp[i++] = *buf++;
-	tmp[i] = 0;
+	if (tmp != 0)
+	{
+		while (string[++i])
+			tmp[i] = string[i];
+		while (*buf)
+			tmp[i++] = *buf++;
+		tmp[i] = 0;
+	}
 	free(string);
+	return (tmp);
+}
+
+char	*cutter_cal1(char **string)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+
+	i = 0;
+	j = -1;
+	while ((*string)[i] != 10 && (*string)[i])
+		i++;
+	tmp = (char *)malloc(i + 2);
+	if (tmp == 0)
+	{
+		free(*string);
+		*string = 0;
+		return (0);
+	}
+	while (++j <= i)
+		tmp[j] = (*string)[j];
+	tmp[j] = 0;
+	if ((*string)[i] == 0)
+	{
+		if (j == 1)
+		{
+			free(tmp);
+			tmp = 0;
+		}
+		free(*string);
+		*string = 0;
+	}
+	*string = rose_knife(*string, i + 1);
 	return (tmp);
 }
 
@@ -99,22 +146,21 @@ char	*cutter_cal(char **string)
 	j = -1;
 	while ((*string)[i] != 10 && (*string)[i])
 		i++;
-	tmp = (char *)malloc(i + 2);
-	while (++j <= i)
-		tmp[j] = (*string)[j];
-	tmp[j] = 0;
-	if ((*string)[i] == 0)
+	if ((*string)[i] == 10)
+		i++;
+	tmp = (char *)malloc(i + 1);
+	if (tmp != 0)
 	{
-		free(*string);
-		if (j == 1)
+		while (++j < i)
+			tmp[j] = (*string)[j];
+		tmp[j] = 0;
+		if (j == 1 && (*string[i] = 0))
 		{
 			free(tmp);
 			tmp = 0;
 		}
-		*string = 0;
 	}
-	else
-		*string = rose_knife(*string, i + 1);
+	*string = rose_knife(*string, i + 0);
 	return (tmp);
 }
 
@@ -126,11 +172,18 @@ char	*rose_knife(char *string, int i)
 
 	len = 0;
 	j = -1;
+	if (string == 0)
+		return (0);
 	while (string[i + len])
 		len++;
 	tmp = (char *)malloc(len + 1);
-	while (++j <= len)
-		tmp[j] = string[i + j];
+	if (tmp != 0)
+		while (++j <= len)
+			tmp[j] = string[i + j];
 	free(string);
 	return (tmp);
 }
+
+
+
+//TODO: 어 cutter_cal1 이 진짜고 그냥 cutter_cal은 테스트로 만드는중
