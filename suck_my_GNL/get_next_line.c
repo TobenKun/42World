@@ -6,7 +6,7 @@
 /*   By: sangshin <zxcv1867@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 19:11:50 by sangshin          #+#    #+#             */
-/*   Updated: 2023/10/26 17:21:10 by sangshin         ###   ########.fr       */
+/*   Updated: 2023/10/28 18:36:45 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,6 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || fd > OPEN_MAX)
 		return (0);
-	/*
-	if (strings[fd] == 0)
-	{
-		strings[fd] = (char *)malloc(1);
-		if (strings[fd] == 0)
-			return (0);
-		strings[fd][0] = 0;
-	}
-	*/
 	if (reader(&strings[fd], fd) == 0)
 	{
 		free(strings[fd]);
@@ -102,17 +93,17 @@ char	*join(char *string, char *buf)
 	return (tmp);
 }
 
-char	*cutter_cal1(char **string)
+char	*cutter_cal(char **string)
 {
+	char	*tmp;
 	int		i;
 	int		j;
-	char	*tmp;
 
 	i = 0;
 	j = -1;
 	while ((*string)[i] != 10 && (*string)[i])
 		i++;
-	tmp = (char *)malloc(i + 2);
+	tmp = (char *)malloc(i + 1 + ((*string)[i] == 10));
 	if (tmp == 0)
 	{
 		free(*string);
@@ -121,46 +112,13 @@ char	*cutter_cal1(char **string)
 	}
 	while (++j <= i)
 		tmp[j] = (*string)[j];
-	tmp[j] = 0;
-	if ((*string)[i] == 0)
+	tmp[i + 0 + ((*string)[i] == 10)] = 0;
+	if (j == 1 && (*string)[i] == 0)
 	{
-		if (j == 1)
-		{
-			free(tmp);
-			tmp = 0;
-		}
-		free(*string);
-		*string = 0;
+		free(tmp);
+		tmp = 0;
 	}
 	*string = rose_knife(*string, i + 1);
-	return (tmp);
-}
-
-char	*cutter_cal(char **string)
-{
-	int		i;
-	int		j;
-	char	*tmp;
-
-	i = 0;
-	j = -1;
-	while ((*string)[i] != 10 && (*string)[i])
-		i++;
-	if ((*string)[i] == 10)
-		i++;
-	tmp = (char *)malloc(i + 1);
-	if (tmp != 0)
-	{
-		while (++j < i)
-			tmp[j] = (*string)[j];
-		tmp[j] = 0;
-		if (j == 1 && (*string[i] = 0))
-		{
-			free(tmp);
-			tmp = 0;
-		}
-	}
-	*string = rose_knife(*string, i + 0);
 	return (tmp);
 }
 
@@ -174,6 +132,12 @@ char	*rose_knife(char *string, int i)
 	j = -1;
 	if (string == 0)
 		return (0);
+	if (string[i - 1] == 0)
+	{
+		free(string);
+		string = 0;
+		return (0);
+	}
 	while (string[i + len])
 		len++;
 	tmp = (char *)malloc(len + 1);
@@ -183,7 +147,3 @@ char	*rose_knife(char *string, int i)
 	free(string);
 	return (tmp);
 }
-
-
-
-//TODO: 어 cutter_cal1 이 진짜고 그냥 cutter_cal은 테스트로 만드는중
