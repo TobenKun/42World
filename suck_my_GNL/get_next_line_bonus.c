@@ -6,21 +6,12 @@
 /*   By: sangshin <zxcv1867@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 19:11:50 by sangshin          #+#    #+#             */
-/*   Updated: 2023/10/28 18:36:45 by sangshin         ###   ########.fr       */
+/*   Updated: 2023/10/30 15:35:44 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-/*
-int	main(void)
-{
-	int fd;
 
-	fd = open("./test.txt", O_RDONLY);
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-}
-*/
 char	*get_next_line(int fd)
 {
 	static char	*strings[OPEN_MAX + 1];

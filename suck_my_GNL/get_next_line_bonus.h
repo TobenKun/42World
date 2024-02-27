@@ -6,7 +6,7 @@
 /*   By: sangshin <zxcv1867@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 19:11:07 by sangshin          #+#    #+#             */
-/*   Updated: 2023/10/28 18:36:47 by sangshin         ###   ########.fr       */
+/*   Updated: 2023/10/30 15:35:52 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
-# include <fcntl.h>
 
 char	*get_next_line(int fd);
 char	*reader(char **string, int fd);

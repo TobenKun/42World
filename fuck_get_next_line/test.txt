@@ -1,4 +1,0 @@
-hello!
-this is test;
-
-you're welcome!
