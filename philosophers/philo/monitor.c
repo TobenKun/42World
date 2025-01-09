@@ -6,7 +6,7 @@
 /*   By: sangshin <zxcv1867@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 17:25:04 by sangshin          #+#    #+#             */
-/*   Updated: 2024/02/27 18:07:19 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:59:18 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ int	dead_check(t_philo *philo)
 	ret = 0;
 	current_time = get_millisecond();
 	pthread_mutex_lock(&philo->self);
-	pthread_mutex_lock(&philo->info->info);
 	if (current_time - philo->last_eat > philo->info->time_to_die)
 	{
 		print_status(philo, 0);
+		pthread_mutex_lock(&philo->info->info);
 		philo->info->game_over = 1;
+		pthread_mutex_unlock(&philo->info->info);
 		ret = 1;
 	}
-	pthread_mutex_unlock(&philo->info->info);
 	pthread_mutex_unlock(&philo->self);
 	return (ret);
 }
@@ -77,12 +77,4 @@ int	game_over_check(t_philo *philo)
 		ret = 1;
 	pthread_mutex_unlock(&philo->info->info);
 	return (ret);
-}
-
-void	mutex_unlock(t_philo *philo)
-{
-	if (philo->info->fork[philo->left_fork])
-		pthread_mutex_unlock(&philo->info->mutex[philo->left_fork]);
-	if (philo->info->fork[philo->right_fork])
-		pthread_mutex_unlock(&philo->info->mutex[philo->right_fork]);
 }

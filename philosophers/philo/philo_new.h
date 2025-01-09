@@ -6,7 +6,7 @@
 /*   By: sangshin <zxcv1867@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 19:09:41 by sangshin          #+#    #+#             */
-/*   Updated: 2024/02/27 18:13:58 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/03/28 08:30:13 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			free_malloc(
 				t_info *info, pthread_t *thread, t_philo *philo, int ret);
 /* simulation.c */
 int			simulation(t_info *info, t_philo *philo, pthread_t *thread);
-int			genius_shin(t_philo *philo, void *func(void *philo));
+int			genius_shin(t_philo *philo, int *func(void *philo));
 void		philo_routine(t_philo *philo);
 /* monitor.c */
 void		*monitoring(t_philo *philo);
@@ -69,11 +69,11 @@ int			dead_check(t_philo *philo);
 int			game_over_check(t_philo *philo);
 void		mutex_unlock(t_philo *philo);
 /* dinner_time.c */
-void		get_left_fork(t_philo *philo);
-void		get_right_fork(t_philo *philo);
-void		eating(t_philo *philo);
-void		finish_eating(t_philo *philo);
-void		thinking(t_philo *philo);
+int			get_left_fork(t_philo *philo);
+int			get_right_fork(t_philo *philo);
+int			eating(t_philo *philo);
+int			finish_eating(t_philo *philo);
+int			thinking(t_philo *philo);
 /* philo_utils.c */
 long long	get_millisecond(void);
 void		print_status(t_philo *philo, char *status);

@@ -6,7 +6,7 @@
 /*   By: sangshin <zxcv1867@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:31:15 by sangshin          #+#    #+#             */
-/*   Updated: 2024/02/27 18:13:57 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/02/29 21:34:27 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,17 @@ void	print_status(t_philo *philo, char *status)
 {
 	static int	finish_flag;
 
+	pthread_mutex_lock(&philo->info->print);
 	if (finish_flag == 1)
+	{
+		pthread_mutex_unlock(&philo->info->print);
 		return ;
+	}
 	if (status == 0)
 	{
 		status = "died";
 		finish_flag++;
 	}
-	pthread_mutex_lock(&philo->info->print);
 	printf("%.5lld %d %s\n",
 		get_millisecond() - philo->info->start_time,
 		philo->num, status);

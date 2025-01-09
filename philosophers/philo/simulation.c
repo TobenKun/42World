@@ -6,7 +6,7 @@
 /*   By: sangshin <zxcv1867@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 17:26:19 by sangshin          #+#    #+#             */
-/*   Updated: 2024/02/24 18:34:00 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:58:39 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,19 @@ void	philo_routine(t_philo *philo)
 		)
 			break ;
 	}
-	mutex_unlock(philo);
 	pthread_mutex_lock(&philo->self);
 	philo->is_finished = 1;
 	pthread_mutex_unlock(&philo->self);
 }
 
-int	genius_shin(t_philo *philo, void *func(void *))
+int	genius_shin(t_philo *philo, int *func(void *))
 {
 	if (philo->eat_count == philo->info->must_eat || game_over_check(philo))
 		return (1);
-	func(philo);
+	if (func(philo))
+	{
+		usleep(100);
+		return (genius_shin(philo, func));
+	}
 	return (0);
 }

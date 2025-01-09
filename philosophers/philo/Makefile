@@ -3,7 +3,7 @@ idx = 0
 sp = /-\|/
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=thread
 NAME = philo
 
 SOURCES = philo_main.c read_arg.c malloc_and_prepare.c philo_utils.c dinner_time.c\
@@ -16,7 +16,7 @@ $(NAME) : make_mandatory
 
 make_mandatory : $(OBJECTS)
 	@rm -rf make_bonus
-	@$(CC) -g $(CFLAGS) $^ -o $(NAME)
+	@$(CC) $(CFLAGS) $^ -o $(NAME)
 	@touch $@
 	@printf "\b\b\b\b\b\b\b\b\b\b\b\b\bDone!               \n"
 
