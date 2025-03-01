@@ -1,0 +1,53 @@
+version: '2.27'
+
+services:
+  nginx:
+    build: requirements/nginx/.
+    init: true
+    container_name: nginx
+    depends_on:
+      - wordpress
+      - mariadb
+    ports:
+      - "443:443"
+    volumes:
+      - ../data/web:/var/www/html
+    networks:
+      inception:
+    environment:
+      - NGINX_HOST=sagnshin.42.fr
+      - NGINX_PORT=443
+    restart: always
+
+  wordpress:
+    build: requirements/wordpress/.
+    init: true
+    container_name: wp-php
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    volumes:
+      - ../data/web:/var/www/html
+    networks:
+      inception:
+    restart: always
+    env_file:
+      - .env
+
+  mariadb:
+    build: requirements/mariadb/.
+    init: true
+    container_name: mariadb
+    volumes:
+      - ../data/database:/var/lib/mysql
+    networks:
+      inception:
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 3s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+networks:
+  inception:
