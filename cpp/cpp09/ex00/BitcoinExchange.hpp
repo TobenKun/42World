@@ -6,7 +6,7 @@
 /*   By: sangshin <zxcv1867@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 19:51:16 by sangshin          #+#    #+#             */
-/*   Updated: 2024/09/18 17:52:51 by sangshin         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:58:37 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class BitcoinExchange
 
 	double calculateValue(const std::string&, double);
 
-	// for test
+	// for debug
 	void printValue();
 
   private:

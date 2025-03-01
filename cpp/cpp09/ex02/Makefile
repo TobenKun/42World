@@ -2,10 +2,10 @@ SHELL = /bin/bash
 idx = 0
 sp = /-\|/
 CC = c++
-CFLAGS = -g #-Wall -Wextra -Werror -std=c++98
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = PmergeMe
 
-SOURCES = main.cpp PmergeMe.cpp
+SOURCES = main.cpp PmergeMe.cpp Pair.cpp
 		
 
 OBJECTS = $(SOURCES:.cpp=.o)

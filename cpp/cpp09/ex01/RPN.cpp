@@ -6,7 +6,7 @@
 /*   By: sangshin <zxcv1867@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 19:18:06 by sangshin          #+#    #+#             */
-/*   Updated: 2024/12/21 15:47:47 by sangshin         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:16:09 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ double RPN::doRPN(const std::string &input)
 {
 	std::istringstream stream(input);
 	char			   one_char;
-	// std::string		   one_tokken;
 	std::stack<double> stack;
 
 	while (stream >> one_char)
