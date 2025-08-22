@@ -1,7 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
-INC_H = libft.h
+INC_H = .
 BONUS = ft_atoi.c        \
 ft_bzero.c               \
 ft_calloc.c              \
