@@ -3,7 +3,7 @@ idx = 0
 sp = /-\|/
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = #-Wall -Wextra -Werror
 NAME = push_swap
 CHECKER = checker
 
@@ -29,12 +29,12 @@ $(CHECKER) : make_bonus
 $(INC_ARC) :
 	@$(MAKE) -C $(ARC_DIR) -s bonus
 
-make_bonus : $(INC_ARC) $(BONUS_OBJ)
+make_bonus : $(BONUS_OBJ) $(INC_ARC)
 	@$(CC) $(CFLAGS) $(BONUS_OBJ) $(INC_ARC) -o $(CHECKER)
 	@touch $@
 	@printf "\b\b\b\b\b\b\b\b\b\b\b\b\bBONUS Done!               \n"
 
-make_mandatory : $(INC_ARC) $(OBJECTS)
+make_mandatory : $(OBJECTS) $(INC_ARC)
 	@$(CC) $(CFLAGS) $^ -o $(NAME)
 	@touch $@
 	@printf "\b\b\b\b\b\b\b\b\b\b\b\b\bDone!               \n"
