@@ -18,6 +18,7 @@ _42서울 공통 과제 모음_
 | 🐣 01 | [**new_libft**](./new_libft) | `new_libft` | libft 발전/확장 버전 |
 | 🐥 01 | [**get_next_line**](./get_next_line) | `get_next_line` | 파일 디스크립터에서 한 줄씩 읽어오는 함수 구현 |
 | 🐤 01 | [**ft_printf**](./ft_printf) | `ft_printf` | C 언어의 `printf` 함수 재구현 |
+| 🐣 01 | [**Born2beroot**](./born2beroot) | `born2beroot` | 가상머신 / 데비안 OS 실습 |
 | 🐥 02 | [**so_long**](./so_long) | `so_long` | 2D 그래픽 게임 제작 (MiniLibX 활용) |
 | 🐤 02 | [**push_swap**](./push_swap) | `push_swap` | 제한된 연산으로 스택 정렬 알고리즘 구현 |
 | 🐣 02 | [**minitalk**](./minitalk) | `minitalk` | 시그널을 활용한 프로세스 간 통신 구현 |
