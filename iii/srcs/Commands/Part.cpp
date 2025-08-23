@@ -62,7 +62,6 @@ void Command::Part(int fd, std::vector<std::string> commandVec)
 			// 채널에 남은 사용자가 1명 이하라면 채널 삭제
 			if (channel->GetUserFdList().size() <= 1)
 			{
-				std::cout << "채널에 fd 갯수 : " << channel->GetUserFdList().size() << std::endl;
 				mServer.RemoveChannel(channel->GetChannelName()); // 채널 삭제
 				delete channel; // 채널 객체 메모리 해제
 			}

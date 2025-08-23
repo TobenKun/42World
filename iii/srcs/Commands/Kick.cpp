@@ -65,8 +65,6 @@ void Command::Kick(int fd, std::vector<std::string> commandVec)
 	for (; vecIt != vec.end(); vecIt++)
 	{
 		Channel* channel = mServer.FindChannel(*vecIt);
-		std::cout << "Find Channel : " << *vecIt << std::endl; // TEST OUTPUT
-
 		// 채널이 존재하지 않으면
 		if (channel == NULL)
 		{

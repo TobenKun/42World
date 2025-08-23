@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 15:49:02 by janhan            #+#    #+#              #
-#    Updated: 2024/11/19 08:28:18 by janhan           ###   ########.fr        #
+#    Updated: 2024/11/19 14:59:58 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,39 +15,39 @@ NAME			=		ircserv
 CXX				=		c++
 CXXFLAGS		=		-Wall -Wextra -Werror -std=c++98
 
-SRCS_DIR	= ./srcs/
-SRCS		=	User.cpp					\
-				Server.cpp					\
-				main.cpp					\
-				Command.cpp					\
-				Channel.cpp					\
-				Bot.cpp
-OBJS_SRCS	=	$(addprefix $(SRCS_DIR), $(SRCS:.cpp=.o))
+SRCS_DIR		=		./srcs/
+SRCS			=		User.cpp					\
+						Server.cpp					\
+						main.cpp					\
+						Command.cpp					\
+						Channel.cpp					\
+						Bot.cpp
+OBJS_SRCS		=		$(addprefix $(SRCS_DIR), $(SRCS:.cpp=.o))
 
-UTILS_DIR	=	./srcs/Utils/
-UTILS		=	IsSpecial.cpp				\
-				Split.cpp
-OBJS_UTILS	=	$(addprefix $(UTILS_DIR), $(UTILS:.cpp=.o))
+UTILS_DIR		=		./srcs/Utils/
+UTILS			=		IsSpecial.cpp				\
+						Split.cpp
+OBJS_UTILS		=		$(addprefix $(UTILS_DIR), $(UTILS:.cpp=.o))
 
-ERROR_DIR	=	./srcs/ErrorUtils/
-ERRORS		=	ResponseManager.cpp
-OBJS_ERROR	=	$(addprefix $(ERROR_DIR), $(ERRORS:.cpp=.o))
+ERROR_DIR		=		./srcs/ErrorUtils/
+ERRORS			=		ResponseManager.cpp
+OBJS_ERROR		=		$(addprefix $(ERROR_DIR), $(ERRORS:.cpp=.o))
 
-CMDS_DIR	=	./srcs/Commands/
-CMDS		=	Invite.cpp					\
-				Join.cpp					\
-				Kick.cpp					\
-				Mode.cpp					\
-				Nick.cpp					\
-				Part.cpp					\
-				Pass.cpp					\
-				Ping.cpp					\
-				Privmsg.cpp					\
-				Quit.cpp					\
-				Topic.cpp					\
-				User.cpp
-OBJS_CMDS	=	$(addprefix $(CMDS_DIR), $(CMDS:.cpp=.o))
-OBJS		=	$(OBJS_SRCS) $(OBJS_UTILS) $(OBJS_CMDS) $(OBJS_ERROR)
+CMDS_DIR		=		./srcs/Commands/
+CMDS			=		Invite.cpp					\
+						Join.cpp					\
+						Kick.cpp					\
+						Mode.cpp					\
+						Nick.cpp					\
+						Part.cpp					\
+						Pass.cpp					\
+						Ping.cpp					\
+						Privmsg.cpp					\
+						Quit.cpp					\
+						Topic.cpp					\
+						User.cpp
+OBJS_CMDS		=		$(addprefix $(CMDS_DIR), $(CMDS:.cpp=.o))
+OBJS			=		$(OBJS_SRCS) $(OBJS_UTILS) $(OBJS_CMDS) $(OBJS_ERROR)
 
 all : $(NAME)
 

@@ -1,7 +1,7 @@
 SHELL = /bin/bash
 idx = 0
 sp = /-\|/
-CC = c++
+CC = clang++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = PmergeMe
 

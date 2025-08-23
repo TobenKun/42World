@@ -243,9 +243,7 @@ void Server::SendBufferToUser()
 
 		if (!user->GetUserSendBuf().empty() && user_fd != -1)
 		{
-			/* TESTOUTPUT */
-			std::cout << "Server Send : " << user->GetUserSendBuf() << std::endl;
-			/* END */
+			std::cout << ">> Server Sent : " << user->GetUserSendBuf() << std::endl;
 			int sent_byte = send(user_fd, user->GetUserSendBuf().c_str(), user->GetUserSendBuf().length(), 0);
 			if (sent_byte > 0)	// 전송 성공하면
 				user->ClearUserSendBuf(sent_byte);
@@ -447,8 +445,8 @@ bool	Server::CheckMessageEnds(int fd)
  */
 void Server::DoCommand(int fd)
 {
-	std::cout << "Docommand NICK : [" << FindUser(fd)->GetNickName() << "]" << std::endl;
-	std::cout << "Recv Send: " << mMessage[fd] << std::endl;
+	std::cout << "From [" << FindUser(fd)->GetNickName() << "]" << std::endl;
+	std::cout << "<< Recv Message: " << mMessage[fd] << std::endl;
 	mCommand->Run(fd);
 	mMessage[fd] = "";
 }
