@@ -30,6 +30,7 @@ make
 ```
 ./cub3D maps/map.cub
 ```
+![화면 기록 2025-08-23 오후 8 22 49](https://github.com/user-attachments/assets/3ede3bb2-c7fc-4b5e-ac20-09f0b08051c0)
 
 --- 
 
