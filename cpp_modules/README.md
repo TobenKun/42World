@@ -19,7 +19,9 @@
 ---
 
 ## 🏁 Run & Test
-### 빌드  
+### 빌드
+
+Makefile의 컴파일러를 환경에 맞게 수정 후
 ```
 make
 ```
@@ -28,6 +30,8 @@ make
 ```
 ./cpp_modules
 ```
+<img width="1156" height="388" alt="image" src="https://github.com/user-attachments/assets/cd856be1-fa40-4bc3-9c87-d09720a0cefd" />
+
 
 - 기본 테스트 케이스 수행(예: 클래스 인스턴스 생성, 함수 호출, 템플릿 함수/클래스 테스트 등)  
 - 추가적으로 다양한 예외 상황이나 경계값 테스트도 진행  
