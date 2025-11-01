@@ -6,7 +6,7 @@
 /*   By: sangshin <zxcv1867@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 12:31:45 by sangshin          #+#    #+#             */
-/*   Updated: 2023/11/25 22:58:50 by sangshin         ###   ########.fr       */
+/*   Updated: 2025/11/01 21:01:18 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ int	printp(t_flag *flag, va_list ap)
 
 int	ulen_check(t_flag *flag, unsigned long long tmp, int base)
 {
-	unsigned long long	dividx;
 	int					len;
 
-	dividx = 1;
 	len = 0;
 	while (tmp)
 	{

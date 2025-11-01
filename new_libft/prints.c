@@ -6,7 +6,7 @@
 /*   By: sangshin <zxcv1867@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 21:47:43 by sangshin          #+#    #+#             */
-/*   Updated: 2023/11/25 22:58:56 by sangshin         ###   ########.fr       */
+/*   Updated: 2025/11/01 21:01:21 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 int	prints(t_flag *flag, va_list ap)
 {
 	char	*tmp;
-	int		i;
 	int		len;
 
-	i = 0;
 	tmp = va_arg(ap, char *);
 	if (tmp == 0)
 		tmp = "(null)";
